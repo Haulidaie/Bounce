@@ -66,7 +66,8 @@ void AProjectile::SetProjectileValues(FProjectileValues projectileValues)
 
 void AProjectile::ChangeProjCollision()
 {
-	if (CollisionComponent->GetCollisionProfileName() == "ProjectileIgnorePlayer") CollisionComponent->SetCollisionProfileName("Projectile");
+	FName name = CollisionComponent->GetCollisionProfileName();
+	if (name == "ProjectileIgnorePlayer") CollisionComponent->SetCollisionProfileName("Projectile");
 	if (Bounces == ElderlyBounce) CollisionComponent->SetCollisionProfileName("OldProjectile");
 }
 
