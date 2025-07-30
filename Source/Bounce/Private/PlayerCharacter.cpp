@@ -278,8 +278,10 @@ void APlayerCharacter::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, U
 	if (OtherActor == this) return;
 	if (OtherComp == nullptr) return;
 
-	if (OtherComp->GetCollisionProfileName() != "Projectile") return;
-	if (AProjectile* projectile = Cast<AProjectile>(OtherActor)) {  // Not sure how to remove the nested if statement here 
+	FName name = OtherComp->GetCollisionProfileName();
+	if (name != "Projectile" && name != "ProjectileEnemy") return;
+	
+	if (AProjectile* projectile = Cast<AProjectile>(OtherActor)) {
 		TakeDamage(projectile->GetProjectileDamage()+ProjDamageMultiplier-1, OtherActor);
 	}
 }
